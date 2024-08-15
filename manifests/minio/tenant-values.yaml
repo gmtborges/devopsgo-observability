@@ -1,0 +1,16 @@
+tenant:
+  certificate:
+    requestAutoCert: false
+  image:
+    repository: quay.io/minio/minio
+    tag: RELEASE.2023-11-15T20-43-25Z
+    pullPolicy: IfNotPresent
+  pools:
+    - servers: 2
+      name: pool-0
+      volumesPerServer: 2
+      size: 5Gi
+      # storageClassName: standard
+  buckets:
+    - name: tempo
+    - name: loki

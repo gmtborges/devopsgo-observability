@@ -1,0 +1,8 @@
+operator:
+  env:
+    - name: MINIO_CONSOLE_TLS_ENABLE
+      value: "off"
+  image:
+    repository: quay.io/minio/operator
+    tag: v5.0.17
+    pullPolicy: IfNotPresent

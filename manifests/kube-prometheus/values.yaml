@@ -1,0 +1,23 @@
+kubeStateMetrics:
+  enabled: false
+nodeExporter:
+  enabled: false
+grafana:
+  enabled: true
+  # # To make Grafana persistent (Using Statefulset)
+  # #
+  # persistence:
+  #   enabled: true
+  #   type: sts
+  #   accessModes:
+  #     - ReadWriteOnce
+  #   size: 5Gi
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      url: http://loki-gateway
+      access: proxy
+    - name: Tempo
+      type: tempo
+      url: http://tempo-query-frontend
+      access: proxy

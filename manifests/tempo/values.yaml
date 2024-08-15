@@ -1,0 +1,27 @@
+---
+storage:
+  trace:
+    backend: s3
+    s3:
+      access_key: "minio"
+      secret_key: "minio123"
+      bucket: "tempo"
+      endpoint: "minio.monitoring.svc.cluster.local"
+      insecure: true
+
+minio:
+  enabled: false
+
+traces:
+  otlp:
+    grpc:
+      enabled: true
+    http:
+      enabled: true
+  zipkin:
+    enabled: false
+  jaeger:
+    thriftHttp:
+      enabled: false
+  opencensus:
+    enabled: false
