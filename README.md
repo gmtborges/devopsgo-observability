@@ -72,7 +72,7 @@ Teste usando seu kubectl local
 
 # Configurando a stack de Observabilidade
 
-## [https://min.io](https:min.io)
+## MinIO
 
 `kubectl create namespace monitoring`
 
