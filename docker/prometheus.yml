@@ -1,0 +1,35 @@
+global:
+  scrape_interval: 15s
+rule_files:
+  - 'rules.yml'
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "alertmanager:9093"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['localhost:9090'] ## IP Address of the localhost
+  
+  - job_name: 'node_exporter'
+    ec2_sd_configs:
+    - filters:
+      - name: tag:Name
+        values:
+         - node-prod
+      port: 9100
+
+  - job_name: 'cadvisor'
+    dns_sd_configs:
+    - names:
+      - 'tasks.cadvisor'
+      type: 'A'
+      port: 8080
+
+  - job_name: 'otel-collector'
+    static_configs:
+      - targets: ['otel-collector:9464']
+

@@ -1,0 +1,71 @@
+groups:
+  - name: liveness
+    rules:
+      # Alert for any instance that is unreachable for >5 minutes.
+      - alert: service_down
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary:
+            "{{ $labels.instance }} of job {{ $labels.job }} has been down for
+            more than 2 minutes."
+
+  - name: api-backend
+    rules:
+      - alert: api ping failed
+        expr:
+          'rate(http_server_duration_milliseconds_count{http_route="/ping",http_status_code!~"200|304"}[1m])
+          > 0'
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "api-backend ping failling"
+
+      - alert: api memory usage
+        expr:
+          'avg(container_memory_usage_bytes{container_label_com_amazonaws_ecs_container_name=~"api-.*"})
+          > 600000000'
+        for: 2m
+        labels:
+          severity: warn
+        annotations:
+          summary: "memory usage {{ $value }}"
+
+      - alert: api status code 5xx over 5%
+        expr:
+          '(sum(rate(http_server_duration_miliseconds_count{status_code=~"5.."}[5m]))
+          / sum(rate(http_server_duration_miliseconds_count[5m]))) * 100 > 5'
+        for: 2m
+        labels:
+          severity: warn
+        annotations:
+          summary: "status code 5xx value: {{ $value }}"
+
+  - name: third-party APIs
+    rules:
+      - alert: third-party API status code 5xx over 5%
+        expr:
+          'sum(rate(http_client_duration_milliseconds_count{http_status_code=~"[5].."}[1m]))
+          by (net_peer_name) /
+          sum(rate(http_client_duration_milliseconds_count[1m])) by
+          (net_peer_name) * 100 > 5'
+        for: 2m
+        labels:
+          severity: error
+        annotations:
+          summary: "{{ $labels.net_peer_name }} status code 5xx: {{ $value }}"
+
+      - alert: third-party API status code 4xx over 5%
+        expr:
+          'sum(rate(http_client_duration_milliseconds_count{http_status_code=~"[4].."}[1m]))
+          by (net_peer_name) /
+          sum(rate(http_client_duration_milliseconds_count[1m])) by
+          (net_peer_name) * 100 > 5'
+        for: 2m
+        labels:
+          severity: error
+        annotations:
+          summary: "{{ $labels.net_peer_name }} status code 4xx: {{ $value }}"

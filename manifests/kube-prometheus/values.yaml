@@ -2,6 +2,10 @@ kubeStateMetrics:
   enabled: false
 nodeExporter:
   enabled: false
+prometheus:
+  prometheusSpec:
+    enableFeatures:
+      - otlp-write-receiver
 grafana:
   enabled: true
   # # To make Grafana persistent (Using Statefulset)
@@ -19,5 +23,5 @@ grafana:
       access: proxy
     - name: Tempo
       type: tempo
-      url: http://tempo-query-frontend
+      url: http://tempo-query-frontend:3100
       access: proxy

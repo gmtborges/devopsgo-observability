@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-demo
+  labels:
+    app: otel-demo
+  namespace: monitoring
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: otel-demo
+  template:
+    metadata:
+      labels:
+        app: otel-demo
+    spec:
+      containers:
+        - name: otel-demo
+          image: gustavomtborges/otel-demo:v1.0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: OTEL_SERVICE_NAME
+              value: "otel-demo"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otelcol-opentelemetry-collector:4318"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-demo
+  labels:
+    app: otel-demo
+  namespace: monitoring
+spec:
+  selector:
+    app: otel-demo
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

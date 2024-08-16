@@ -11,10 +11,10 @@ loki:
   ingester:
     chunk_encoding: snappy
   tracing:
-    enabled: true
+    enabled: false
   querier:
     # Default is 4, if you have enough memory and CPU you can increase, reduce if OOMing
-    max_concurrent: 4
+    max_concurrent: 2
   auth_enabled: false
   storage:
     type: s3
@@ -23,7 +23,7 @@ loki:
       ruler: "loki"
       admin: "loki"
     s3:
-      endpoint: "http://minio.monitoring.svc.cluster.local"
+      endpoint: "http://minio"
       accessKeyId: "minio"
       secretAccessKey: "minio123"
       s3ForcePathStyle: true

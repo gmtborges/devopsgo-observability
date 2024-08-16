@@ -1,0 +1,56 @@
+services:
+  loki:
+    image: grafana/loki
+    command:
+      - "-config.file=/etc/loki/config.yaml"
+    configs:
+      - source: loki
+        target: /etc/loki/config.yaml
+    ports:
+      - 3100:3100
+    volumes:
+      - loki:/tmp
+    networks:
+      - o11y
+
+  promtail:
+    image: grafana/promtail
+    deploy:
+      mode: global
+    ports:
+      - 9080:9080
+    command:
+      - "-config.file=/etc/promtail/config.yaml"
+    configs:
+      - source: promtail
+        target: /etc/promtail/config.yaml
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - o11y
+
+  demo-app:
+    image: gustavomtborges/otel-demo
+    ports:
+      - 8080:8080
+    environment:
+      - OTEL_SERVICE_NAME=otel-demo
+      - OTEL_OTLP_EXPORTER_ENDPOINT=http://otel-collector:4318
+    labels:
+      - log=promtail
+      - log_jobname=otel-demo
+    networks:
+      - o11y
+
+configs:
+  loki:
+    file: ./loki-config.yaml
+  promtail:
+    file: ./promtail-config.yaml
+
+volumes:
+  loki:
+
+networks:
+  o11y:
+    external: true

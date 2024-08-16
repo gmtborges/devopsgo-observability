@@ -20,7 +20,7 @@ config:
       tls:
         insecure: true
     otlphttp/prometheus:
-      endpoint: http://0.0.0.0:4318
+      endpoint: http://kube-prometheus-stack-prometheus:9090/api/v1/otlp
       tls:
         insecure: true
 

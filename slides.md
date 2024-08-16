@@ -1,6 +1,7 @@
 ---
 author: Gustavo Martins T Borges
-title: "Meetup DevOpsGO Hands-on Observabilidade"
+title: "Meetup DevOpsGO"
+subtitle: "Hands-on Observabilidade"
 date: 17 de Agosto, 2024.
 theme: white
 header-includes: |
@@ -15,18 +16,26 @@ header-includes: |
 
   .reveal h1 {
       font-size: 1.9em;
+      text-transform: none;
   }
 
   .reveal h2 {
       font-size: 1.4em;
+      text-transform: none;
   }
 
   .reveal h3 {
       font-size: 1em;
+      text-transform: none;
   }
 
   .reveal p {
       font-size: 0.7em;
+  }
+
+  .reveal .subtitle {
+      font-size: 1.3em;
+      font-weight: 600;
   }
 
   li {
@@ -40,7 +49,6 @@ header-includes: |
   #contatos p {
     display: block;
   }
-
   </style>
 ---
 
@@ -66,6 +74,10 @@ header-includes: |
 # Observabilidade
 
 ### Tracings, Métricas e Logs.
+
+#
+
+<h1>Monitoramento<br /> x <br /> Observabilidade<h1>
 
 # Tracings
 
@@ -144,7 +156,7 @@ AWS EBS-CSI-Driver
 
 [https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md](https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md){target="\_blank"}
 
-```
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -217,16 +229,39 @@ Otel Collector
 
 ## Dev
 
+SDK
+
 [https://opentelemetry.io/docs/languages/](https://opentelemetry.io/docs/languages/){target="\_blank"}
 
-SDK, instrumentação
+#
+
+## Dev
+
+Instrumentação
+
+[https://opentelemetry.io/ecosystem/registry/?language=js&component=instrumentation](https://opentelemetry.io/ecosystem/registry/?language=js&component=instrumentation){target="\_blank"}
+
+#
+
+## Dev
 
 2 variáveis de ambiente
 
 - `OTEL_SERVICE_NAME`
 - `OTEL_EXPORTER_OTLP_ENDPOINT`
 
-# Dúvidas
+#
+
+## Open Telemetry Demo
+
+#
+
+## Dashboards e alertas
+
+Aprenda aos poucos promQL e faça seus próprios dashboards e alertas. Lembre-se
+de criar métricas para o seu usuário final.
+
+[https://prometheus.io/docs/prometheus/latest/querying/basics/](https://prometheus.io/docs/prometheus/latest/querying/basics/){target="\_blank"}
 
 #
 

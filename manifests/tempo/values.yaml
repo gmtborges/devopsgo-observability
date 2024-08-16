@@ -6,7 +6,7 @@ storage:
       access_key: "minio"
       secret_key: "minio123"
       bucket: "tempo"
-      endpoint: "minio.monitoring.svc.cluster.local"
+      endpoint: "minio"
       insecure: true
 
 minio:

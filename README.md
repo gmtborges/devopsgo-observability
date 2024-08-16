@@ -8,9 +8,12 @@
 ## Ferramentas
 
 - [Vagrant](https://developer.hashicorp.com/vagrant)
-  - MacOS: VMWare Fusion
-  - Linux: VirtualBox
+  - MacOS:
+    [VMWare Fusion](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion)
+  - Linux: [VirtualBox](https://www.virtualbox.org/),
+    [VMWare Workstation](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion)
 - [K3s](https://k3s.io)
+- [HELM](https://helm.sh/)
 
 ## Criar o cluster
 
@@ -22,7 +25,7 @@ Configurar o Control Plane
 
 `vagrant ssh controlplane`
 
-`curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644`
+`curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644 --disable=traefik --disable=servicelb`
 
 Teste
 
@@ -114,6 +117,12 @@ Opcional, mc CLI
 
 `helm upgrade --install tempo grafana/tempo-distributed -f values.yaml`
 
+## Kube-Prometheus-Stack
+
+`cd maniefsts/kube-prometheus`
+
+`helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack -f values.yaml`
+
 ## Open Telemetry
 
 ## Ops
@@ -125,3 +134,21 @@ Opcional, mc CLI
 `helm upgrade --install otelcol open-telemetry/opentelemetry-collector -f values.yaml`
 
 ### Dev
+
+1. Instalar o SDK.
+2. Configurar a instrumentação.
+3. Adicionar as variáveis de ambiente.
+
+[https://opentelemetry.io/docs/languages/](https://opentelemetry.io/docs/languages/)
+
+`cd maniefsts/otel-demo`
+
+`kubectl apply -f deployment.yaml`
+
+## Visualizando as métricas, logs e tracings
+
+`kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80`
+
+## Enviando telemetria através de aplicação externa
+
+`kubectl port-forward svc/otelcol-opentelemetry-collector 4318:4318`

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="Gustavo Martins T Borges">
-  <title>Meetup DevOpsGO Hands-on Observabilidade</title>
+  <title>Meetup DevOpsGO</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,6 +29,70 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/white.css" id="theme">
   <style>
@@ -42,18 +106,26 @@
 
   .reveal h1 {
       font-size: 1.9em;
+      text-transform: none;
   }
 
   .reveal h2 {
       font-size: 1.4em;
+      text-transform: none;
   }
 
   .reveal h3 {
       font-size: 1em;
+      text-transform: none;
   }
 
   .reveal p {
       font-size: 0.7em;
+  }
+
+  .reveal .subtitle {
+      font-size: 1.3em;
+      font-weight: 600;
   }
 
   li {
@@ -67,7 +139,6 @@
   #contatos p {
     display: block;
   }
-
   </style>
 </head>
 <body>
@@ -75,7 +146,8 @@
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">Meetup DevOpsGO Hands-on Observabilidade</h1>
+  <h1 class="title">Meetup DevOpsGO</h1>
+  <p class="subtitle">Hands-on Observabilidade</p>
   <p class="author">Gustavo Martins T Borges</p>
   <p class="date">17 de Agosto, 2024.</p>
 </section>
@@ -107,6 +179,12 @@ do código até a operação.</li>
 <h1>Observabilidade</h1>
 <h3 id="tracings-métricas-e-logs.">Tracings, Métricas e Logs.</h3>
 </section>
+<section id="section-1" class="slide level1">
+<h1></h1>
+<h1>
+Monitoramento<br /> x <br /> Observabilidade
+<h1>
+</section>
 <section id="tracings" class="slide level1">
 <h1>Tracings</h1>
 <p>Troubleshooting</p>
@@ -115,7 +193,7 @@ do código até a operação.</li>
 <h1>Métricas</h1>
 <p>Estratégia, a base para o SRE.</p>
 </section>
-<section id="section-1" class="slide level1">
+<section id="section-2" class="slide level1">
 <h1></h1>
 <h2 id="as-métricas-são-para-melhorar-a-experiência-do-seu-usuário">As
 métricas são para melhorar a experiência do seu usuário!</h2>
@@ -165,7 +243,7 @@ target="_blank">https://github.com/gmtborges/devopsgo-observability</a></p>
 <section id="prática" class="slide level1">
 <h1>Prática</h1>
 </section>
-<section id="section-2" class="slide level1">
+<section id="section-3" class="slide level1">
 <h1></h1>
 <h2 id="configurando-a-persistência">Configurando a persistência</h2>
 <ul>
@@ -173,7 +251,7 @@ target="_blank">https://github.com/gmtborges/devopsgo-observability</a></p>
 <li>Minio</li>
 </ul>
 </section>
-<section id="section-3" class="slide level1">
+<section id="section-4" class="slide level1">
 <h1></h1>
 <h2 id="storage-class">Storage Class</h2>
 <p>Provisionamento dinâmico de volumes a partir da criação de um
@@ -181,62 +259,63 @@ PersistentVolumeClaim.</p>
 <p>Setando o storage class default</p>
 <p><code>storageclass.kubernetes.io/is-default-class: "true"</code></p>
 </section>
-<section id="section-4" class="slide level1">
+<section id="section-5" class="slide level1">
 <h1></h1>
 <p>AWS EBS-CSI-Driver</p>
 <p><a
 href="https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md"
 target="_blank">https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md</a></p>
-<pre><code>apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ebs-sc
-  annotations:
-    storageclass.kubernetes.io/is-default-class: &quot;true&quot;
-provisioner: ebs.csi.aws.com
-volumeBindingMode: WaitForFirstConsumer
-parameters:
-  type: gp3</code></pre>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> storage.k8s.io/v1</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> StorageClass</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> ebs-sc</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">annotations</span><span class="kw">:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">storageclass.kubernetes.io/is-default-class</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;true&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">provisioner</span><span class="kw">:</span><span class="at"> ebs.csi.aws.com</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">volumeBindingMode</span><span class="kw">:</span><span class="at"> WaitForFirstConsumer</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">parameters</span><span class="kw">:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> gp3</span></span></code></pre></div>
 </section>
-<section id="section-5" class="slide level1">
+<section id="section-6" class="slide level1">
 <h1></h1>
 <p>Nodes com storage distribuído.</p>
 <p><a href="https://github.com/longhorn/longhorn"
 target="_blank">https://github.com/longhorn/longhorn</a></p>
 </section>
-<section id="section-6" class="slide level1">
+<section id="section-7" class="slide level1">
 <h1></h1>
 <h2 id="minio">Minio</h2>
 <p><a href="https://min.io" target="_blank">https://min.io</a></p>
 <p>Object Storage Self Hosted.</p>
 </section>
-<section id="section-7" class="slide level1">
+<section id="section-8" class="slide level1">
 <h1></h1>
 <h2 id="configurando-logs-métricas-e-tracings">Configurando logs,
 métricas e tracings</h2>
 </section>
-<section id="section-8" class="slide level1">
+<section id="section-9" class="slide level1">
 <h1></h1>
 <h2 id="loki-1">Loki</h2>
 <p><a
 href="https://grafana.com/docs/loki/latest/setup/install/helm/install-scalable/"
 target="_blank">https://grafana.com/docs/loki/latest/setup/install/helm/install-scalable/</a></p>
 </section>
-<section id="section-9" class="slide level1">
+<section id="section-10" class="slide level1">
 <h1></h1>
 <h2 id="promtail">Promtail</h2>
 <p><a
 href="https://grafana.com/docs/loki/latest/send-data/promtail/installation/#install-using-helm"
 target="_blank">https://grafana.com/docs/loki/latest/send-data/promtail/installation/#install-using-helm</a></p>
 </section>
-<section id="section-10" class="slide level1">
+<section id="section-11" class="slide level1">
 <h1></h1>
 <h2 id="tempo-1">Tempo</h2>
 <p><a
 href="https://grafana.com/docs/helm-charts/tempo-distributed/next/get-started-helm-charts/#install-grafana-tempo-using-the-helm-chart"
 target="_blank">https://grafana.com/docs/helm-charts/tempo-distributed/next/get-started-helm-charts/#install-grafana-tempo-using-the-helm-chart</a></p>
 </section>
-<section id="section-11" class="slide level1">
+<section id="section-12" class="slide level1">
 <h1></h1>
 <h2 id="kube-prometheus-stack">kube-prometheus-stack</h2>
 <p><a
@@ -248,7 +327,7 @@ Grafana.</p>
 <section id="open-telemetry-1" class="slide level1">
 <h1>Open Telemetry</h1>
 </section>
-<section id="section-12" class="slide level1">
+<section id="section-13" class="slide level1">
 <h1></h1>
 <h2 id="ops-1">Ops</h2>
 <p><a href="https://opentelemetry.io/docs/collector/"
@@ -258,22 +337,44 @@ href="https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/char
 target="_blank">https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector</a></p>
 <p>Otel Collector</p>
 </section>
-<section id="section-13" class="slide level1">
+<section id="section-14" class="slide level1">
 <h1></h1>
 <h2 id="dev-1">Dev</h2>
+<p>SDK</p>
 <p><a href="https://opentelemetry.io/docs/languages/"
 target="_blank">https://opentelemetry.io/docs/languages/</a></p>
-<p>SDK, instrumentação</p>
+</section>
+<section id="section-15" class="slide level1">
+<h1></h1>
+<h2 id="dev-2">Dev</h2>
+<p>Instrumentação</p>
+<p><a
+href="https://opentelemetry.io/ecosystem/registry/?language=js&amp;component=instrumentation"
+target="_blank">https://opentelemetry.io/ecosystem/registry/?language=js&amp;component=instrumentation</a></p>
+</section>
+<section id="section-16" class="slide level1">
+<h1></h1>
+<h2 id="dev-3">Dev</h2>
 <p>2 variáveis de ambiente</p>
 <ul>
 <li><code>OTEL_SERVICE_NAME</code></li>
 <li><code>OTEL_EXPORTER_OTLP_ENDPOINT</code></li>
 </ul>
 </section>
-<section id="dúvidas" class="slide level1">
-<h1>Dúvidas</h1>
+<section id="section-17" class="slide level1">
+<h1></h1>
+<h2 id="open-telemetry-demo">Open Telemetry Demo</h2>
 </section>
-<section id="section-14" class="slide level1">
+<section id="section-18" class="slide level1">
+<h1></h1>
+<h2 id="dashboards-e-alertas">Dashboards e alertas</h2>
+<p>Aprenda aos poucos promQL e faça seus próprios dashboards e alertas.
+Lembre-se de criar métricas para o seu usuário final.</p>
+<p><a
+href="https://prometheus.io/docs/prometheus/latest/querying/basics/"
+target="_blank">https://prometheus.io/docs/prometheus/latest/querying/basics/</a></p>
+</section>
+<section id="section-19" class="slide level1">
 <h1></h1>
 <h3
 id="quer-configurar-observabilidade-em-sua-empresa-e-melhorar-a-estabilidade-de-suas-aplicações">Quer
