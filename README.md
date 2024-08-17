@@ -145,10 +145,37 @@ Opcional, mc CLI
 
 `kubectl apply -f deployment.yaml`
 
+Gerando telemetria para o Otel Collector
+
+`kubectl port-forward svc/otel-demo 8080:8080`
+
+`curl http://localhost:8080/rolldice?rolls=4`
+
+`curl http://localhost:8080/rolldice`
+
 ## Visualizando as métricas, logs e tracings
 
 `kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80`
 
+### Observação
+
+Caso o Loki não esteja trazendo os logs, verifique se o cluster consegue
+resolver o com FQDN.
+
+[https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/](https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/)
+
+Uma solução pode ser reiniciar o server do K3s
+
+`vagrant halt controlplane`
+
+`vagrant up controlplane`
+
 ## Enviando telemetria através de aplicação externa
 
 `kubectl port-forward svc/otelcol-opentelemetry-collector 4318:4318`
+
+`cd demo`
+
+Necessário ter o NodeJS 20 ou >
+
+`node -r ts-node/register -r ./instrumentation.ts --env-file=.env app.ts`
